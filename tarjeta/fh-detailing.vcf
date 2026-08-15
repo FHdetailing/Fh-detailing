@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Huerta;Felipe;;;
+FN:Felipe Huerta (FH Detailing)
+ORG:FH Detailing
+TITLE:Fundador - Detailing automotriz movil
+TEL;TYPE=CELL,VOICE:+56998415265
+EMAIL;TYPE=INTERNET,WORK:contacto@fhdetailing.cl
+URL:https://fhdetailing.cl
+X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/fhdetailing__
+ADR;TYPE=WORK:;;;Antofagasta;;;Chile
+NOTE:Detailing automotriz premium movil. Unidad VW Transporter con agua y energia propias\, vamos donde esta tu vehiculo. Cuidamos lo que te mueve.
+END:VCARD
