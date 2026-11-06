@@ -40,6 +40,8 @@
     instagram: "https://instagram.com/fhdetailing__",
     tiktok: "https://tiktok.com/@fhdetailing__",
     solicitudCondominio: "/solicitud-condominio.pdf",
+    // Imagen del asistente (botón flotante y cabecera). Si el archivo no existe, se usa el ícono.
+    imagen: "asistente.png",
     banco: [
       ["Titular", "FH DETAILING SPA"],
       ["RUT", "78.376.999-9"],
@@ -1396,6 +1398,12 @@
 .fhc-launch:hover{background:var(--fhc-btn-hi);transform:translateY(-2px) scale(1.04);box-shadow:0 14px 40px rgba(0,191,198,.5),0 2px 8px rgba(0,0,0,.45)}
 .fhc-launch:active{transform:scale(.94)}
 .fhc-launch:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.fhc-launch.fhc-con-img{width:68px;height:68px;background:radial-gradient(circle at 50% 40%,#1c2626,#050505 70%);border:2px solid var(--fhc-teal);overflow:visible}
+.fhc-launch.fhc-con-img>svg{display:none}
+.fhc-launch-img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:50%;display:block}
+.fhc-av.fhc-con-img{padding:0;overflow:hidden;font-size:0}
+.fhc-av.fhc-con-img i{display:none}
+.fhc-av-img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
 .fhc-badge{position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#4ADE80;border:2px solid #050505}
 .fhc-teaser{position:absolute;right:0;bottom:calc(100% + 12px);width:max-content;max-width:min(270px,calc(100vw - 44px));background:#141717;border:1px solid rgba(0,191,198,.35);
   border-radius:16px 16px 4px 16px;box-shadow:0 12px 34px rgba(0,0,0,.55);opacity:0;transform:translateY(8px);visibility:hidden;
@@ -1528,6 +1536,17 @@ html.fhc-lock,html.fhc-lock body{overflow:hidden}
     if (cls) e.className = cls;
     if (html != null) e.innerHTML = html;
     return e;
+  }
+
+  // Pone la imagen del asistente; si no carga, queda el ícono original.
+  function conImagen(cont, cls) {
+    if (!NEGOCIO.imagen || !cont) return;
+    const img = new Image();
+    img.alt = "";
+    img.className = cls;
+    img.decoding = "async";
+    img.onload = () => { cont.classList.add("fhc-con-img"); cont.insertBefore(img, cont.firstChild); };
+    img.src = NEGOCIO.imagen;
   }
 
   function emit(tipo, det) {
@@ -1795,6 +1814,7 @@ html.fhc-lock,html.fhc-lock body{overflow:hidden}
     log = panel.querySelector(".fhc-log");
     input = panel.querySelector(".fhc-in");
     input.placeholder = PH;
+    conImagen(panel.querySelector(".fhc-av"), "fhc-av-img");
     stDot = panel.querySelector(".fhc-dot");
     stTxt = panel.querySelector(".fhc-st");
     const waHead = panel.querySelector(".fhc-wa");
@@ -1940,6 +1960,7 @@ html.fhc-lock,html.fhc-lock body{overflow:hidden}
       '<button type="button" class="fhc-teaser-t"><b>¿Dudas con tu servicio?</b>Te muestro precios y te dejo la reserva lista.</button>' +
       '<button type="button" class="fhc-teaser-x" aria-label="Cerrar mensaje">' + ICO.close + "</button>");
     launch = el("button", "fhc-launch", ICO.chat + '<span class="fhc-badge" aria-hidden="true"></span>');
+    conImagen(launch, "fhc-launch-img");
     launch.type = "button";
     launch.setAttribute("aria-label", "Abrir asistente virtual de FH Detailing");
     launch.setAttribute("aria-expanded", "false");
